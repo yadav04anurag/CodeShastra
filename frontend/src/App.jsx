@@ -12,6 +12,11 @@ import AdminVideo from "./components/AdminVideo";
 import AdminDelete from "./components/AdminDelete";
 import AdminUpload from "./components/AdminUpload";
 import UserProfilePage from "./pages/UserProfilePage";
+
+import ContestListPage from './pages/ContestListPage';
+import ContestPage from './pages/ContestPage';
+import CreateContestPage from './pages/CreateContestPage';
+import AddProblemPage from './components/contests/AddProblemPage';
 function App() {
   const dispatch = useDispatch();
   const { isAuthenticated, user, loading } = useSelector((state) => state.auth);
@@ -102,6 +107,37 @@ function App() {
           }
         />
         <Route path="/problem/:problemId" element={<ProblemPage />}></Route>
+           <Route
+          path="/contests"
+          element={<ContestListPage />}
+        />
+        
+        <Route
+          path="/contests/create"
+          element={
+            isAuthenticated && user?.role === "admin" ? (
+              <CreateContestPage />
+            ) : (
+              <Navigate to="/" />
+            )
+          }
+        />
+        
+        <Route
+          path="/contests/:contestId"
+          element={<ContestPage />}
+        />
+        
+        <Route
+          path="/contests/:contestId/add-problem"
+          element={
+            isAuthenticated && user?.role === "admin" ? (
+              <AddProblemPage />
+            ) : (
+              <Navigate to="/" />
+            )
+          }
+        />
       </Routes>
     </>
   );
