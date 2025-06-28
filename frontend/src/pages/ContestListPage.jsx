@@ -2,14 +2,17 @@
 import React, { useState } from 'react';
 import ContestList from '../components/contests/ContestList';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router';
+import { NavLink } from 'react-router';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const ContestListPage = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white py-12">
-      <div className="container mx-auto px-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white ">
+      <Header />
+      <div className="container mx-auto px-4 py-5 mb-10">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -24,12 +27,6 @@ const ContestListPage = () => {
               </p>
             </div>
             
-            <Link 
-              to="/contests/create"
-              className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-black font-bold px-6 py-3 rounded-lg transition-all"
-            >
-              Create Contest
-            </Link>
           </div>
           
           <ContestList 
@@ -38,6 +35,7 @@ const ContestListPage = () => {
           />
         </motion.div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

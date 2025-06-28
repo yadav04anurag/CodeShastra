@@ -1,15 +1,16 @@
 import { NavLink } from "react-router";
-import { useSelector, useDispatch} from "react-redux";
-import { logoutUser } from "../authSlice"; 
+import { useSelector, useDispatch } from "react-redux";
+import { logoutUser } from "../authSlice";
 import { useNavigate } from "react-router";
+
 const Header = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-let navigate = useNavigate();
+  let navigate = useNavigate();
   const handleLogout = () => {
     dispatch(logoutUser());
     // Optionally, redirect the user after logout
-    navigate('/login');
+    navigate("/login");
   };
 
   return (
@@ -23,7 +24,6 @@ let navigate = useNavigate();
             CodeShastra
           </span>
         </NavLink>
-
         {user && (
           <div className="flex items-center gap-6">
             <div className="dropdown dropdown-end">
@@ -44,23 +44,111 @@ let navigate = useNavigate();
                 </div>
               </div>
               <ul className="mt-3 p-2 shadow menu menu-sm dropdown-content bg-gray-800 rounded-box w-52 border border-gray-700">
-                {user.role === "admin" && (
+                {user.role === "admin" &&
+                  window.location.pathname !== "/admin" && (
+                    <li>
+                      <NavLink
+                        to="/admin"
+                        className="text-white hover:bg-gray-700 rounded-lg py-2 px-4 flex items-center"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5 mr-2"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 005 10a6 6 0 0012 0c0-.35-.029-.693-.084-1.024A5 5 0 0010 11z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        Admin Dashboard
+                      </NavLink>
+                    </li>
+                  )}
+                { user && window.location.pathname !== "/user" &&
                   <li>
                     <NavLink
-                      to="/admin"
+                      to="/user"
                       className="text-white hover:bg-gray-700 rounded-lg py-2 px-4 flex items-center"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 005 10a6 6 0 0012 0c0-.35-.029-.693-.084-1.024A5 5 0 0010 11z" clipRule="evenodd" /></svg>
-                      Admin Dashboard
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5 mr-2"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 005 10a6 6 0 0012 0c0-.35-.029-.693-.084-1.024A5 5 0 0010 11z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      User Dashboard
+                    </NavLink>
+                  </li>
+                }
+                {/* Only show Home if not on "/" */}
+                {user &&window.location.pathname !== "/" && (
+                  <li>
+                    <NavLink
+                      to="/"
+                      className="text-white hover:bg-gray-700 rounded-lg py-2 px-4 flex items-center"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5 mr-2"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 005 10a6 6 0 0012 0c0-.35-.029-.693-.084-1.024A5 5 0 0010 11z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      Home
                     </NavLink>
                   </li>
                 )}
+                {user &&window.location.pathname !== "/contests" &&<li>
+                  <NavLink
+                    to="/contests"
+                    className="text-white hover:bg-gray-700 rounded-lg py-2 px-4 flex items-center"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 mr-2"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 005 10a6 6 0 0012 0c0-.35-.029-.693-.084-1.024A5 5 0 0010 11z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    Contests
+                  </NavLink>
+                </li>}
                 <li>
                   <button
                     onClick={handleLogout}
                     className="text-white hover:bg-gray-700 rounded-lg py-2 px-4 flex items-center w-full"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clipRule="evenodd" /></svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 mr-2"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
                     Logout
                   </button>
                 </li>

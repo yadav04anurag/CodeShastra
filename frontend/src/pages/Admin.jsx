@@ -106,8 +106,17 @@
 
 // src/pages/Admin.jsx (updated)
 import React, { useState } from "react";
-import { Plus, Edit, Trash2, Home, RefreshCw, Zap, Video, Trophy } from "lucide-react";
-import { NavLink } from "react-router";
+import { 
+  Plus, 
+  Edit, 
+  Trash2, 
+  Home, 
+  RefreshCw, 
+  Zap, 
+  Video, 
+  Trophy 
+} from "lucide-react";
+import { NavLink } from "react-router"; 
 
 function Admin() {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -163,14 +172,25 @@ function Admin() {
   return (
     <div className="min-h-screen bg-base-200">
       <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-base-content mb-4">
-            Admin Panel
-          </h1>
-          <p className="text-base-content/70 text-lg">
-            Manage contests and problems on your platform
-          </p>
+        {/* Header with Home button */}
+        <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-4">
+          <div className="text-center md:text-left">
+            <h1 className="text-4xl font-bold text-base-content mb-2">
+              Admin Panel
+            </h1>
+            <p className="text-base-content/70 text-lg">
+              Manage contests and problems on your platform
+            </p>
+          </div>
+          
+          {/* Home Button */}
+          <NavLink 
+            to="/" 
+            className="btn btn-outline btn-primary flex items-center gap-2"
+          >
+            <Home size={20} />
+            Go to Home
+          </NavLink>
         </div>
 
         {/* Admin Options Grid */}
@@ -198,14 +218,12 @@ function Admin() {
 
                   {/* Action Button */}
                   <div className="card-actions">
-                    <div className="card-actions">
-                      <NavLink
-                        to={option.route}
-                        className={`btn ${option.color} btn-wide`}
-                      >
-                        {option.title}
-                      </NavLink>
-                    </div>
+                    <NavLink
+                      to={option.route}
+                      className={`btn ${option.color} btn-wide`}
+                    >
+                      {option.title}
+                    </NavLink>
                   </div>
                 </div>
               </div>

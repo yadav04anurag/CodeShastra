@@ -11,12 +11,19 @@ import Admin from "./pages/Admin";
 import AdminVideo from "./components/AdminVideo";
 import AdminDelete from "./components/AdminDelete";
 import AdminUpload from "./components/AdminUpload";
+import UpdateProblem from "./components/UpdateProblem";
 import UserProfilePage from "./pages/UserProfilePage";
 
 import ContestListPage from './pages/ContestListPage';
 import ContestPage from './pages/ContestPage';
 import CreateContestPage from './pages/CreateContestPage';
 import AddProblemPage from './components/contests/AddProblemPage';
+
+
+
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
   const dispatch = useDispatch();
   const { isAuthenticated, user, loading } = useSelector((state) => state.auth);
@@ -87,6 +94,16 @@ function App() {
           }
         />
         <Route
+          path="/admin/update"
+          element={
+            isAuthenticated && user?.role === "admin" ? (
+              <UpdateProblem></UpdateProblem>
+            ) : (
+              <Navigate to="/" />
+            )
+          }
+        />
+        <Route
           path="/admin/video"
           element={
             isAuthenticated && user?.role === "admin" ? (
@@ -139,6 +156,7 @@ function App() {
           }
         />
       </Routes>
+      
     </>
   );
 }

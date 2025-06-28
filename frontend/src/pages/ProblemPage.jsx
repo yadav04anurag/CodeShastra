@@ -1670,6 +1670,7 @@ import ChatAi from "../components/ChatAi";
 import Editorial from "../components/Editorial";
 import Header from "../components/Header"; 
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
+import LoadingSpinner from "../components/ui/LoadingSpinner";
 
 const ProblemPage = () => {
   const [problem, setProblem] = useState(null);
@@ -1773,7 +1774,7 @@ const ProblemPage = () => {
   if (loading && !problem) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-900">
-        <span className="loading loading-spinner loading-lg text-cyan-400"></span>
+       <LoadingSpinner size="lg"></LoadingSpinner>
       </div>
     );
   }

@@ -293,6 +293,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 
 import axiosClient from '../utils/axiosClient';
 import Header from '../components/Header';
 import { format } from 'date-fns';
+import Footer from '../components/Footer';
 
 const UserProfilePage = () => {
   const { user } = useSelector((state) => state.auth);
@@ -342,6 +343,7 @@ const UserProfilePage = () => {
         <div className="flex justify-center items-center h-[calc(100vh-80px)] text-red-400">
           {error}
         </div>
+        <Footer></Footer>
       </div>
     );
   }
@@ -361,6 +363,7 @@ const UserProfilePage = () => {
           </div>
         </div>
       </main>
+      <Footer></Footer>
     </div>
   );
 };
@@ -438,6 +441,7 @@ const DifficultyChart = ({ stats }) => {
   };
 
   return (
+    
     <div className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-2xl border border-gray-700 shadow-2xl transition-all duration-300 hover:shadow-purple-500/10 hover:border-purple-500/30">
       <h2 className="text-xl font-bold mb-4 text-white">Difficulty Breakdown</h2>
       <div style={{ width: '100%', height: 250 }}>
@@ -579,7 +583,9 @@ const RecentSubmissionsTable = ({ submissions }) => {
           <p className="text-gray-500">No submissions yet.</p>
         </div>
       )}
+      
     </div>
+    
   );
 };
 

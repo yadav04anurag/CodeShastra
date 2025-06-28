@@ -14,6 +14,8 @@ import Leaderboard from '../components/contests/Leaderboard';
 import TabNavigation from '../components/contests/TabNavigation';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import { format } from 'date-fns';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const ContestPage = () => {
   const { contestId } = useParams();
@@ -163,7 +165,8 @@ const ContestPage = () => {
   const contestStatus = getContestStatus();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white mb-5">
+      <Header></Header>
       <ContestDetails 
         contest={contest} 
         timeRemaining={timeRemaining} 
@@ -262,6 +265,7 @@ const ContestPage = () => {
           )}
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

@@ -34,7 +34,7 @@ const register = async (req,res)=>{
     })
     }
     catch(err){
-        res.status(400).send("Error: "+err);
+        res.status(400).send(err);
     }
 }
 
@@ -71,7 +71,7 @@ const login = async (req,res)=>{
         })
     }
     catch(err){
-        res.status(401).send("Error: "+err);
+        res.status(401).send(err);
     }
 }
 
@@ -95,7 +95,7 @@ const logout = async(req,res)=>{
 
     }
     catch(err){
-       res.status(503).send("Error: "+err);
+       res.status(503).send(err);
     }
 }
 
@@ -117,7 +117,7 @@ const adminRegister = async(req,res)=>{
      res.status(201).send("User Registered Successfully");
     }
     catch(err){
-        res.status(400).send("Error: "+err);
+        res.status(400).send(err);
     }
 }
 
