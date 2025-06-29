@@ -17,7 +17,7 @@ const cors = require('cors')
 
 app.use(cors({
     //origin: 'http://localhost:5173',
-    origin:'https://code-shastra.vercel.app',
+    origin:'https://code-shastra.vercel.app/',
     credentials: true 
 }))
 
