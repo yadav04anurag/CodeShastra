@@ -187,6 +187,7 @@ const getProblemById = async(req,res)=>{
    } 
   
    return res.status(200).send(responseData);
+   
    }
     
    res.status(200).send(getProblem);

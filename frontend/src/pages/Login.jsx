@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,10 +15,14 @@ import {
 import { motion } from "framer-motion";
 import { AuthLayout } from "./AuthLayout";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const loginSchema = z.object({
   emailId: z.string().email("Please enter a valid email"),
-  password: z.string().min(8, "Password must be at least 8 characters"),
+  password: z.string()
+    .min(8, "Password must be at least 8 characters")
+    
 });
 
 function Login() {
@@ -40,6 +45,27 @@ function Login() {
     }
   }, [isAuthenticated, navigate]);
 
+  // Show toast notification when there's an error
+  useEffect(() => {
+    if (error) {
+      toast.error(error, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        style: {
+          background: '#2a0e39',
+          border: '1px solid #6d28d9',
+          color: '#f0abfc',
+        }
+      });
+    }
+  }, [error]);
+
   const onSubmit = (data) => {
     dispatch(loginUser(data));
   };
@@ -48,30 +74,7 @@ function Login() {
     <AuthLayout 
       title="Welcome Back" 
       subtitle="Master the Art of Coding - Sign in to continue your journey"
-    >  {console.log(error)}
-      {error && (
-        <motion.div 
-          className="bg-red-900/70 border border-red-600 text-red-200 rounded-lg py-3 px-4 mb-6 flex items-start gap-3"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <svg
-            className="h-5 w-5 mt-0.5 flex-shrink-0"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          <span className="text-sm">{error}</span>
-        </motion.div>
-      )}
-
+    >
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Email Field */}
         <div>

@@ -8,6 +8,8 @@ export const registerUser = createAsyncThunk(
     const response =  await axiosClient.post('/user/register', userData);
     return response.data.user;
     } catch (error) {
+      console.log(error);
+      console.log(rejectWithValue(error));
       return rejectWithValue(error);
     }
   }
