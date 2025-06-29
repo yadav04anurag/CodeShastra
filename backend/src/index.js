@@ -34,6 +34,14 @@ app.use('/collect',statsRouter);
 
 app.use('/getcontests', contestRouter);
 
+
+app.get('/',(req,res)=>{
+    res.send({
+        activeStatus:"true",
+        error:"false"
+    })
+})
+
 const InitalizeConnection = async ()=>{
     try{
 
