@@ -36,10 +36,9 @@ app.use('/getcontests', contestRouter);
 
 
 app.get('/',(req,res)=>{
-    res.send({
-        activeStatus:"true",
-        error:"false"
-    })
+    res.send(
+        " Your backend is running "
+    )
 })
 
 const InitalizeConnection = async ()=>{
