@@ -156,7 +156,6 @@ codeshastra/
 │   └── package.json       # Frontend dependencies
 │
 ├── assets/                # Images and media files
-├── docker-compose.yml     # Docker configuration
 ├── LICENSE                # Project license
 └── README.md              # Project documentation
 ```
