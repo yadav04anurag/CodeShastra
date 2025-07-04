@@ -73,7 +73,7 @@ const updateProblem = async (req,res)=>{
     
   const {id} = req.params;
   const {title,description,difficulty,tags,
-    visibleTestCases,hiddenTestCases,startCode,
+    visibleTestCases,hiddenTestCases,starterCode,
     referenceSolution, problemCreator
    } = req.body;
 
@@ -198,6 +198,44 @@ const getProblemById = async(req,res)=>{
   }
 }
 
+const getProblemByIdAdmin = async(req,res)=>{
+
+  const {id} = req.params;
+  try{
+     
+    if(!id)
+      return res.status(400).send("ID is Missing");
+
+    const getProblem = await Problem.findById(id).select('_id title description difficulty tags visibleTestCases starterCode referenceSolution hiddenTestCases');
+   
+    // video ka jo bhi url wagera le aao
+
+   if(!getProblem)
+    return res.status(404).send("Problem is Missing");
+
+   const videos = await SolutionVideo.findOne({problemId:id});
+
+   if(videos){   
+    
+   const responseData = {
+    ...getProblem.toObject(),
+    secureUrl:videos.secureUrl,
+    thumbnailUrl : videos.thumbnailUrl,
+    duration : videos.duration,
+   } 
+  
+   return res.status(200).send(responseData);
+   
+   }
+    
+   res.status(200).send(getProblem);
+
+  }
+  catch(err){
+    res.status(500).send("Error: "+err);
+  }
+}
+
 const getAllProblem = async(req,res)=>{
   const userId = req.result._id;
   try{
@@ -270,6 +308,6 @@ const submittedProblem = async(req,res)=>{
 
 
 
-module.exports = {createProblem,updateProblem,deleteProblem,getProblemById,getAllProblem,solvedAllProblembyUser,submittedProblem};
+module.exports = {createProblem,updateProblem,deleteProblem,getProblemById,getAllProblem,solvedAllProblembyUser,submittedProblem,getProblemByIdAdmin};
 
 

@@ -7,9 +7,9 @@ const getstats= async (req,res)=>{
         const userId = req.result._id;
 
         // Count solved problems (unique problems with at least one accepted submission)
-        const solvedProblems = await Submission.distinct('problemId',{ userId: userId, status: "accepted" });
-        const solvedCount = solvedProblems.length;
-
+        const solvedProblems = await Submission.distinct('problemId', { userId: userId, status: "accepted" });
+        const solvedCount = await Submission.countDocuments({ userId: userId, status: "accepted" });
+        const totalSolvedProblems=solvedProblems.length;
         // Total submissions by user
         const totalSubmissions = await Submission.countDocuments({ userId: userId });
 
@@ -28,6 +28,7 @@ const getstats= async (req,res)=>{
 
         res.json({
             solvedCount,
+            totalSolvedProblems,
             totalSubmissions,
             accuracy,
             easySolved,

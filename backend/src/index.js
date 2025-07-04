@@ -17,8 +17,9 @@ const cors = require('cors')
 
 app.use(cors({
     //origin: 'http://localhost:5173',
-    origin:'https://code-shastra.vercel.app',
-    credentials: true 
+    origin:['http://localhost:5173,https://code-shastra.vercel.app','http://localhost:5173','https://code-shastra-*.vercel.app'],
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization']
 }))
 
 app.use(express.json());

@@ -304,8 +304,8 @@ import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import axiosClient from '../utils/axiosClient';
-import { useNavigate } from 'react-router';
-
+import { useNavigate,NavLink } from 'react-router';
+import { Home } from 'lucide-react';
 const problemSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   description: z.string().min(1, 'Description is required'),
@@ -647,10 +647,18 @@ function AdminPanel() {
 
     <div className="container mx-auto px-4 py-10 bg-base-100 min-h-screen" data-theme="dark">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-3xl font-bold mb-10 text-primary text-center">Create New Problem</h1>
-        
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-12">
-          {/* Basic Information */}
+      <div className="flex items-center justify-between mb-10">
+        <h1 className="text-3xl font-bold text-primary text-center flex-1">Create New Problem</h1>
+        <NavLink 
+        to="/admin" 
+        className="btn btn-outline btn-primary flex items-center gap-2 ml-6"
+        >
+        <Home size={20} />
+        Go to Admin
+        </NavLink>
+      </div>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-12">
+        {/* Basic Information */}
           <div className="card bg-base-200 shadow-xl">
             <div className="card-body p-8">
               <h2 className="text-xl font-bold mb-8 text-secondary pb-3 border-b-2 border-primary">

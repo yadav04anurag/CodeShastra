@@ -19,7 +19,7 @@ import ContestPage from './pages/ContestPage';
 import CreateContestPage from './pages/CreateContestPage';
 import AddProblemPage from './components/contests/AddProblemPage';
 
-
+import LoadingSpinner from "./components/ui/LoadingSpinner";
 
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -35,8 +35,8 @@ function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <span className="loading loading-spinner loading-lg"></span>
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+        <LoadingSpinner size="xl" />
       </div>
     );
   }

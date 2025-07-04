@@ -64,13 +64,7 @@ const login = async (req, res) => {
         }
 
         const token = jwt.sign({ _id: user._id, emailId: emailId, role: user.role }, process.env.JWT_KEY, { expiresIn: 60 * 60 });
-        res.cookie('token', token, {
-            httpOnly: true,
-            secure: true, // Required for HTTPS
-            sameSite: 'none', // Required for cross-origin
-            domain: '.vercel.app' // Allow all Vercel subdomains
-            , maxAge: 60 * 60 * 1000
-        });
+        res.cookie('token', token, { path: '/', httpOnly: 'false', maxAge: 60 * 60 * 1000 });
         res.status(201).json({
             user: reply,
             message: "Loggin Successfully"
